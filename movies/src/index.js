@@ -15,6 +15,7 @@ import TrendingMoviesPage from "./pages/trendingMoviesPage";
 import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import NowPlayingMoviesPage from "./pages/nowPlayingPage";
 
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
