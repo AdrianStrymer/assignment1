@@ -6,6 +6,7 @@ import { getMovie } from '../api/tmdb-api'
 import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 import MovieActors from "../components/movieActors";
+import SimilarMovies from "../components/similarMovies";
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const MoviePage = (props) => {
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            <SimilarMovies movieId={id} />
             <MovieActors movieId={id} />
           </PageTemplate>
         </>

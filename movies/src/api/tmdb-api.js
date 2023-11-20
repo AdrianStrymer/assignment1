@@ -137,5 +137,20 @@ export const getMovie = (args) => {
     });
   };
 
+  export const getSimilarMovies = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    ).then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch similar movies');
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error("Failed to fetch similar movies:", error);
+      throw error;
+    });
+  };
+
   
   
