@@ -5,7 +5,6 @@ import ActorCard from '../actorCard';
 import { getMovieActors } from '../../api/tmdb-api';
 import Grid from '@mui/material/Grid';
 
-
 const MovieActors = ({ movieId }) => {
   const { data, isLoading, isError, error } = useQuery(
     ['actors', movieId],
@@ -25,7 +24,7 @@ const MovieActors = ({ movieId }) => {
       <h2>Main Cast</h2>
       <Grid container>
         {data.cast.slice(0, 8).map((actor) => (
-          <ActorCard key={actor.id} actor={actor} />
+          <ActorCard key={actor.id} actor={actor}/>
         ))}
       </Grid>
     </div>

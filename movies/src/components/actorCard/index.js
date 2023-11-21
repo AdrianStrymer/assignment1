@@ -4,9 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
-const ActorCard = ({ actor }) => {
+const ActorCard = ({ actor}) => {
+  const navigate = useNavigate();
   const IMAGE_BASE_URL = 'http://image.tmdb.org/t/p/w500';
+
+  const showActorMovies = () => {
+    navigate(`/actors/${actor.id}/movies`);
+  };
   
   return (
     <Grid item xs={2.5}>
@@ -25,6 +32,9 @@ const ActorCard = ({ actor }) => {
             as {actor.character}
           </Typography>
         </CardContent>
+        <Button onClick={showActorMovies}>
+          Show Movies
+        </Button>
       </Card>
     </Grid>
   );

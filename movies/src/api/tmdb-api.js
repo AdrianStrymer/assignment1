@@ -152,5 +152,35 @@ export const getMovie = (args) => {
     });
   };
 
+  export const getActorMovieCredits = (actorId) => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch actor movie credits');
+      }
+      return response.json();
+    })
+    .catch(error => {
+      throw error;
+    });
+  };
+
+  export const getActorDetails = (actorId) => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${actorId}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+    )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch actor details');
+      }
+      return response.json();
+    })
+    .catch(error => {
+      throw error;
+    });
+  };
+
   
   
