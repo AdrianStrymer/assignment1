@@ -1,4 +1,4 @@
-import React, {useState, useEffect}  from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -13,6 +13,8 @@ import img from '../../images/pexels-dziana-hasanbekava-5480827.jpg'
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from '../spinner'
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const formControl = 
   {
@@ -39,7 +41,7 @@ export default function FilterMoviesCard(props) {
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
-    props.onUserInput(type, value); // NEW
+    props.onUserInput(type, value);
   };
 
   const handleTextChange = (e, props) => {
@@ -48,6 +50,14 @@ export default function FilterMoviesCard(props) {
 
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
+  };
+
+  const handleRatingChange = (e) => {
+    props.onUserInput("rating", e.target.value);
+  };
+
+  const handleSortChange = (event) => {
+    props.onUserInput("sortAlphabetically", event.target.checked);
   };
   
   return (
@@ -89,6 +99,24 @@ export default function FilterMoviesCard(props) {
             })}
           </Select>
         </FormControl>
+        <TextField
+        sx={{ ...formControl }}
+        id="rating"
+        label="Min Rating (1-10)"
+        type="search"
+        variant="filled"
+        value={props.ratingFilter}
+        onChange={handleRatingChange}
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={props.sortAlphabetically}
+            onChange={handleSortChange}
+          />
+        }
+        label="Sort Alphabetically"
+      />
       </CardContent>
       <CardMedia
         sx={{ height: 300 }}
