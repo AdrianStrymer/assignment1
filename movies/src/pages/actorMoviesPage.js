@@ -6,6 +6,7 @@ import PageTemplate from '../components/templateMovieListPage';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
 
+
 const ActorMoviesPage = () => {
   const { actorId } = useParams();
   const { data: actorData, isLoading: isLoadingActor, isError: isErrorActor, error: actorError } = useQuery(
@@ -16,7 +17,7 @@ const ActorMoviesPage = () => {
     ['actorMovies', actorId],
     () => getActorMovieCredits(actorId)
   );
-
+  
   if (isLoadingActor || isLoadingMovies) {
     return <Spinner />;
   }
