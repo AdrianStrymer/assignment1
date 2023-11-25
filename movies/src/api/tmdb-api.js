@@ -28,6 +28,20 @@ export const getMovie = (args) => {
     throw error
  });
 };
+
+export const getMoviesByDecade = (startYear, endYear) => {
+  return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&primary_release_date.gte=${startYear}-01-01&primary_release_date.lte=${endYear}-12-31`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+};
+
   
   export const getGenres = async () => {
     return fetch(
