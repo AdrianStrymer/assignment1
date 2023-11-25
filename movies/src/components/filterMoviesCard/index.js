@@ -56,8 +56,16 @@ export default function FilterMoviesCard(props) {
     props.onUserInput("rating", e.target.value);
   };
 
-  const handleSortChange = (event) => {
+  const handleAlphabeticalSortChange = (event) => {
     props.onUserInput("sortAlphabetically", event.target.checked);
+  };
+
+  const handlePopularitySortChange = (event) => {
+    props.onUserInput("sortByPopularity", event.target.checked);
+  };
+
+  const handleOverviewChange = (e) => {
+    handleChange(e, "overview", e.target.value);
   };
   
   return (
@@ -108,14 +116,33 @@ export default function FilterMoviesCard(props) {
         value={props.ratingFilter}
         onChange={handleRatingChange}
       />
+
+        <TextField
+        sx={{ ...formControl }}
+        id="overview-search"
+        label="Search in Overview"
+        type="search"
+        variant="filled"
+        value={props.overviewFilter}
+        onChange={handleOverviewChange}
+      />
       <FormControlLabel
         control={
           <Checkbox
             checked={props.sortAlphabetically}
-            onChange={handleSortChange}
+            onChange={handleAlphabeticalSortChange}
           />
         }
         label="Sort Alphabetically"
+      />
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={props.sortByPopularity}
+            onChange={handlePopularitySortChange}
+          />
+        }
+        label="Sort by Popularity"
       />
       </CardContent>
       <CardMedia

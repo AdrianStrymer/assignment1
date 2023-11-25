@@ -11,8 +11,11 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const [ratingFilter, setRatingFilter] = useState("");
   const [sortAlphabetically, setSortAlphabetically] = useState(false);
+  const [sortByPopularity, setSortByPopularity] = useState(false);
+  const [overviewFilter, setOverviewFilter] = useState("");
   const genreId = Number(genreFilter);
 
+  console.log(movies)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 11; 
 
@@ -25,10 +28,18 @@ function MovieListPageTemplate({ movies, title, action }) {
     })
     .filter((m) => {
       return ratingFilter ? parseFloat(m.vote_average) >= parseFloat(ratingFilter) : true;
+    })
+    .filter((m) => {
+      return overviewFilter ? m.overview.toLowerCase().includes(overviewFilter.toLowerCase()) : true;
     });
+    
     
     if (sortAlphabetically) {
       filteredMovies.sort((a, b) => a.title.localeCompare(b.title));
+    }
+
+    if (sortByPopularity) {
+      filteredMovies.sort((a, b) => b.popularity - a.popularity);
     }
 
     const firstItemIndex = (currentPage - 1) * itemsPerPage;
@@ -44,7 +55,10 @@ function MovieListPageTemplate({ movies, title, action }) {
     else if (type === "genre") setGenreFilter(value);
     else if (type === "rating") setRatingFilter(value);
     else if (type === "sortAlphabetically") setSortAlphabetically(value);
+    else if (type === "sortByPopularity") setSortByPopularity(value);
+    else if (type === "overview") setOverviewFilter(value);
   };
+
 
   return (
     <Grid container>
@@ -58,7 +72,9 @@ function MovieListPageTemplate({ movies, title, action }) {
             titleFilter={nameFilter}
             genreFilter={genreFilter}
             ratingFilter={ratingFilter}
+            overviewFilter={overviewFilter}
             sortAlphabetically={sortAlphabetically}
+            sortByPopularity={sortByPopularity}
           />
         </Grid>
         <MovieList action={action} movies={displayedMovies} />
