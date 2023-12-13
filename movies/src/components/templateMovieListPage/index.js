@@ -15,7 +15,6 @@ function MovieListPageTemplate({ movies, title, action }) {
   const [overviewFilter, setOverviewFilter] = useState("");
   const genreId = Number(genreFilter);
 
-  console.log(movies)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 11; 
 

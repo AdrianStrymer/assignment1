@@ -45,7 +45,9 @@ const MoviesByDecadePage = () => {
                     onChange={handleDecadeChange}
                 >
                     {[1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010].map(decade => (
-                        <MenuItem key={decade} value={decade}>{decade}s</MenuItem>
+                        <MenuItem key={decade} value={decade}>
+                            {decade}s
+                        </MenuItem>
                     ))}
                 </Select>
             </FormControl>
