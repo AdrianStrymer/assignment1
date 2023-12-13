@@ -28,6 +28,7 @@ router.post('/', asyncHandler(async (req, res) => {
         res.status(500).json({ success: false, msg: 'Internal server error.' });
     }
 }));
+
 // Update a user
 router.put('/:id', async (req, res) => {
     if (req.body._id) delete req.body._id;

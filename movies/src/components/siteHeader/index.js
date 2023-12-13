@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,15 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { AuthContext } from "../../contexts/authContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { signout } = useContext(AuthContext); 
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  
   
   const navigate = useNavigate();
 
@@ -33,7 +36,7 @@ const SiteHeader = ({ history }) => {
     { label: "Trending", path: "/movies/trending" },
     { label: "Top Rated", path: "/movies/topRated" },
     { label: "Now Playing", path: "/movies/nowPlaying" },
-    { label: "Movies By Decade", path: "/movies/moviesByDecade" },
+    { label: "Movies By Decade", path: "/movies/moviesByDecade" }
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -100,7 +103,9 @@ const SiteHeader = ({ history }) => {
                   >
                     {opt.label}
                   </Button>
+                  
                 ))}
+                <Button color="inherit" onClick={signout}>Logout</Button>
               </>
             )}
         </Toolbar>
