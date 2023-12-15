@@ -8,15 +8,32 @@ const UserSchema = new Schema({
   password: {type: String, required: true }
 });
 
-const passwordValidator = (password) => {
-  return password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
+const passwordValidator = (password, username) => {
+  const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+  const consecutiveSequence = /(.)\1\1/;
+
+  const usernameCheck = new RegExp(username, 'i');
+
+  const isStrongPassword = strongPasswordRegex.test(password);
+  const hasConsecutiveSequence = consecutiveSequence.test(password);
+  const containsUsername = usernameCheck.test(password);
+
+  return isStrongPassword && !hasConsecutiveSequence && !containsUsername;
 }
+
+const usernameRegex = /^[A-Za-z0-9]{3,15}$/;
+
+UserSchema.path('username').validate(function (username) {
+  return usernameRegex.test(username);
+});
 
 UserSchema.path("password").validate(passwordValidator);
 
 UserSchema.methods.comparePassword = async function (passw) { 
   return await bcrypt.compare(passw, this.password); 
 }
+
 
 UserSchema.statics.findByUserName = function (username) {
   return this.findOne({ username: username });

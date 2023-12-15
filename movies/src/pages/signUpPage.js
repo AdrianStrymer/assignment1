@@ -8,16 +8,44 @@ const SignUpPage = props => {
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [registered, setRegistered] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const register = () => {
-    let passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    const validPassword = passwordRegEx.test(password);
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const consecutiveSequence = /(.)\1\1/;
+    const usernameCheck = new RegExp(userName, 'i');
 
-    if (validPassword && password === passwordAgain) {
-      context.register(userName, password);
-      setRegistered(true);
+  
+    if (!strongPasswordRegex.test(password)) {
+      setErrorMessage("Password must be at least 8 characters long, including an uppercase letter, a lowercase letter, a number, and a special character.");
+      return;
     }
+    if (consecutiveSequence.test(password)) {
+      setErrorMessage("Password should not contain sequences of three or more repeated characters.");
+      return;
+    }
+    if (usernameCheck.test(password)) {
+      setErrorMessage("Password should not contain your username.");
+      return;
+    }
+    if (password !== passwordAgain) {
+      setErrorMessage("The passwords entered do not match. Please ensure both passwords are identical.");
+      return;
+    }
+    if (!validateUsername(userName)) {
+        setErrorMessage("Username must be 3-15 characters and can only contain letters and numbers.");
+        return;
+      }
+  
+    context.register(userName, password);
+    setRegistered(true);
+    setErrorMessage(""); 
   }
+
+  const validateUsername = (username) => {
+    const usernameRegex = /^[A-Za-z0-9]{3,15}$/;
+    return usernameRegex.test(username);
+  };
 
   if (registered === true) {
     return <Navigate to="/login" />;
@@ -27,6 +55,7 @@ const SignUpPage = props => {
     <>
       <h2>SignUp page</h2>
       <p>You must register a username and password to log in </p>
+      {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
       <input value={userName} placeholder="user name" onChange={e => {
         setUserName(e.target.value);
       }}></input><br />
