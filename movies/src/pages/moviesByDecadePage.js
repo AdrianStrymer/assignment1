@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { getMoviesByDecade } from '../api/tmdb-api';
+import { getMoviesByDecade } from '../api/frontend-api';
 import Spinner from '../components/spinner';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';

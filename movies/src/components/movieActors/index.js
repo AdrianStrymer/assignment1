@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import Spinner from '../spinner';
 import ActorCard from '../actorCard';
-import { getMovieActors } from '../../api/tmdb-api';
+import { getMovieActors } from '../../api/frontend-api';
 import Grid from '@mui/material/Grid';
 
 const MovieActors = ({ movieId }) => {

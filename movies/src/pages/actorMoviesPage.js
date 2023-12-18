@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { getActorDetails, getActorMovieCredits } from '../api/tmdb-api';
+import { getActorDetails, getActorMovieCredits } from '../api/frontend-api';
 import PageTemplate from '../components/templateMovieListPage';
 import Spinner from '../components/spinner';
 import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';

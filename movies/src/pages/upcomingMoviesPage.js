@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import PageTemplate from '../components/templateMovieListPage';
-import { getUpcomingMovies } from "../api/tmdb-api"
+import { getUpcomingMovies } from "../api/frontend-api"
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
