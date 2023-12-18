@@ -13,8 +13,6 @@ const SignUpPage = props => {
   const register = () => {
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     const consecutiveSequence = /(.)\1\1/;
-    const usernameCheck = new RegExp(userName, 'i');
-
   
     if (!strongPasswordRegex.test(password)) {
       setErrorMessage("Password must be at least 8 characters long, including an uppercase letter, a lowercase letter, a number, and a special character.");
@@ -22,10 +20,6 @@ const SignUpPage = props => {
     }
     if (consecutiveSequence.test(password)) {
       setErrorMessage("Password should not contain sequences of three or more repeated characters.");
-      return;
-    }
-    if (usernameCheck.test(password)) {
-      setErrorMessage("Password should not contain your username.");
       return;
     }
     if (password !== passwordAgain) {

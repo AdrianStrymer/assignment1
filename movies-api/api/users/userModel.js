@@ -8,18 +8,15 @@ const UserSchema = new Schema({
   password: {type: String, required: true },
 });
 
-const passwordValidator = (password, username) => {
+const passwordValidator = (password) => {
   const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
   const consecutiveSequence = /(.)\1\1/;
 
-  const usernameCheck = new RegExp(username, 'i');
-
   const isStrongPassword = strongPasswordRegex.test(password);
   const hasConsecutiveSequence = consecutiveSequence.test(password);
-  const containsUsername = usernameCheck.test(password);
 
-  return isStrongPassword && !hasConsecutiveSequence && !containsUsername;
+  return isStrongPassword && !hasConsecutiveSequence;
 }
 
 const usernameRegex = /^[A-Za-z0-9]{3,15}$/;

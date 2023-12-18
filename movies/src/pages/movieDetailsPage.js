@@ -7,6 +7,8 @@ import { useQuery } from "react-query";
 import Spinner from '../components/spinner'
 import MovieActors from "../components/movieActors";
 import SimilarMovies from "../components/similarMovies";
+import AlternativeTitles from "../components/alternativeTitles";
+import ReleaseDates from "../components/releaseDates";
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -30,8 +32,10 @@ const MoviePage = (props) => {
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            <ReleaseDates movieId={id} />
             <SimilarMovies movieId={id} />
             <MovieActors movieId={id} />
+            <AlternativeTitles movieId={id} />
           </PageTemplate>
         </>
       ) : (

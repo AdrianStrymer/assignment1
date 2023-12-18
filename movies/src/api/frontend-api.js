@@ -231,7 +231,7 @@ export const getTopRatedMovies = async () => {
 };
 
 
-export const getNowPlayingMovies = async (page) => {
+export const getNowPlayingMovies = async () => {
   const response = await fetch(
     'http://localhost:8080/api/movies/tmdb/nowplaying', {
     headers: {
@@ -270,6 +270,18 @@ export const getSimilarMovies = async (id) => {
 export const getActorMovieCredits = async (actorId) => {
   const response = await fetch(
     `http://localhost:8080/api/movies/tmdb/actors/${actorId}/moviecredits`, {
+    headers: {
+      'Authorization': window.localStorage.getItem("token")
+    },
+    method: 'get'
+  }
+  )
+  return response.json();
+};
+
+export const getAlternativeTitles = async (movieId) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/tmdb/movie/${movieId}/alttitles`, {
     headers: {
       'Authorization': window.localStorage.getItem("token")
     },
@@ -391,6 +403,20 @@ export const getMoviesByDecade = async (startYear, endYear) => {
 )
 return response.json();
 };
+
+export const getReleaseDates = async (id) => {
+  const response = await fetch(
+    `http://localhost:8080/api/movies/tmdb/movie/${id}/releasedates`, {
+    headers: {
+      'Authorization': window.localStorage.getItem("token")
+    },
+    method: 'get'
+  }
+  )
+  return response.json();
+};
+
+
 
 
 
