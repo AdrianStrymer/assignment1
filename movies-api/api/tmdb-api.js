@@ -212,6 +212,36 @@ export const getMovies = () => {
         throw error;
       });
     };
+
+    export const getPopularActors = () => {
+      return fetch(
+        `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      )
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch popular actors');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        throw error;
+      });
+    };
+
+    export const getKeywords = (movieId) => {
+      return fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/keywords?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      )
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch movie keywords');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        throw error;
+      });
+    };
   
     export const getActorDetails = (actorId) => {
       return fetch(

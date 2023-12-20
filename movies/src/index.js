@@ -20,6 +20,7 @@ import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signUpPage";
 import ProtectedRoutes from "./protectedRoutes";
 import AuthContextProvider from "./contexts/authContext";
+import PopularActorsPage from "./pages/popularActorsPage";
 
 
 
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/movies/topRated" element={<TopRatedMoviesPage />} />
           <Route path="/movies/nowPlaying" element={<NowPlayingMoviesPage />} />
           <Route path="/movies/moviesByDecade" element={<MoviesByDecadePage />} />
+          <Route path="/movies/popularActors" element={<PopularActorsPage />} />
           <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
           <Route path="/movies/:id" element={<MoviePage />} />
           <Route path="/" element={<HomePage />} />

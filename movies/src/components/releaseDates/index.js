@@ -28,7 +28,7 @@ const ReleaseDates = ({ movieId }) => {
             .map(country => (
               country.release_dates.map(release => (
                 <li key={release.iso_3166_1}>
-                  {country.iso_3166_1}: {release.release_date} ({release.type})
+                  {country.iso_3166_1}: {release.release_date.split('T')[0]} 
                 </li>
               ))
             ))}

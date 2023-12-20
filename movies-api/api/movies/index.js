@@ -2,7 +2,7 @@ import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
 import {getUpcomingMovies, getMovies, getGenres, getMovie, getMoviesByDecade, getMovieImages, getMovieReviews, getTrendingMovies, getTopRatedMovies,
-    getNowPlayingMovies, getMovieActors, getSimilarMovies, getActorMovieCredits, getActorDetails, getAlternativeTitles, getReleaseDates} from '../tmdb-api';
+    getNowPlayingMovies, getMovieActors, getSimilarMovies, getActorMovieCredits, getActorDetails, getAlternativeTitles, getReleaseDates, getPopularActors, getKeywords} from '../tmdb-api';
 
 
 const router = express.Router();
@@ -121,6 +121,16 @@ router.get('/tmdb/movie/:movieId/alttitles', asyncHandler(async (req, res) => {
 router.get('/tmdb/movie/:id/releasedates', asyncHandler(async (req, res) => {
     const releaseDates = await getReleaseDates(req.params.id);
     res.status(200).json(releaseDates);
+}));
+
+router.get('/tmdb/popular', asyncHandler(async (req, res) => {
+    const popularactors = await getPopularActors();
+    res.status(200).json(popularactors);
+}));
+
+router.get('/tmdb/movie/:movieId/keywords', asyncHandler(async (req, res) => {
+    const keywords = await getKeywords(req.params.movieId);
+    res.status(200).json(keywords);
 }));
 
 export default router;

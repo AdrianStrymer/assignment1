@@ -9,6 +9,7 @@ import MovieActors from "../components/movieActors";
 import SimilarMovies from "../components/similarMovies";
 import AlternativeTitles from "../components/alternativeTitles";
 import ReleaseDates from "../components/releaseDates";
+import MovieKeywords from "../components/keywords";
 
 const MoviePage = (props) => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const MoviePage = (props) => {
             <SimilarMovies movieId={id} />
             <MovieActors movieId={id} />
             <AlternativeTitles movieId={id} />
+            <MovieKeywords movieId={id} />
           </PageTemplate>
         </>
       ) : (
